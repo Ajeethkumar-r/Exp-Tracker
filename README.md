@@ -2,7 +2,7 @@
 
 ### This is a personal expense tracker
 
-<p>Motive -To brsh the baic </p>
+<p>Motive of the project - To brush the basic </p>
 
 - Javascript
 - Html
