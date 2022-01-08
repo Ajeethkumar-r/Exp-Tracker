@@ -7,6 +7,6 @@
 #### Tech Stacks
 
 - Javascript
-- Html
-- Css
+- Html5
+- Css3
 - Bootstrap
