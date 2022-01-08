@@ -4,6 +4,8 @@
 
 <p>Built in a single HTML file - To brush up the basic concepts</p>
 
+#### Tech Stacks
+
 - Javascript
 - Html
 - Css
