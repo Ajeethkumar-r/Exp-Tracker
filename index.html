@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Js-tut</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    /> -->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
+      integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      #amount {
+        font-size: larger;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+      }
+      #headExpense {
+        padding: 0px 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-dark bg-dark position-sticky fixed-top"
+      style="margin-top: 3rem; width: 100%; margin-left: auto;"
+    >
+      <span class="navbar-brand mb-0 text-uppercase font-weight-bold"
+        >Budgettrack</span
+      >
+    </nav>
+    <div class="container-fluid bg-light" style="min-height: 100vh">
+      <div class="container">
+        
+      <div class="jumbotron mt-4">
+        <div class="input-group mb-3">
+          <div class="input-group-append">
+            <span class="input-group-text" id="spent in rupee">Initial</span>
+          </div>
+          <input
+          type="text"
+          id="initialAmount"
+          class="form-control"
+          placeholder="Initial Amount"
+          aria-describedby="spent in rupee"
+          required
+          />
+        </div>
+
+        
+        <h3 class="text-white w-25 pl-2 text-white bg-danger  w-auto  rounded-sm" id="primary">
+        </h3>
+
+        <!-- Input boxes -->
+        <div class="jumbotron mt-1">
+          <div class="input-group mb-2">
+            <input
+              type="text"
+              id="inputAmount"
+              class="form-control"
+              placeholder="Amount spent"
+              aria-label="Amount spent"
+              aria-describedby="spent in rupee"
+              required
+            />
+            <div class="input-group-append">
+              <span class="input-group-text" id="spent in rupee">₹</span>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="spent at">@</span>
+            </div>
+            <input
+              type="text"
+              id="inputDesc"
+              class="form-control "
+              placeholder="spent On"
+              aria-label="spent On"
+              aria-describedby="spent at"
+              required
+            />
+            <div class="input-group-append">
+             
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="btnCounter"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+          <h3 id="headExpense" class="mt-4 p-1 badge-info rounded-sm "></h3>
+        </div>
+        
+
+
+         
+        <!-- expense table -->
+        <div>
+          <ul class="list-group" id="expenseTable"></ul>
+        </div>
+
+        <!-- js features -->
+        <!-- <input id="inputAmount" type="text" /> -->
+        <!-- <input id="inputDesc" type="text" /> -->
+        <!-- <button id="btnCounter">+</button> -->
+    </div>
+    <!-- Bootstrap theme -->
+
+    <script>
+      // get headElement FROM DOM
+      const headElement = document.querySelector('#headExpense');
+
+      // get the inputElement GET INPUT BOX
+      const inputText = document.querySelector('#inputAmount');
+
+      // get inputDesc from DOM
+      const inputDescEl = document.querySelector('#inputDesc');
+
+      // get table ref
+      const expenseTableEl = document.querySelector('#expenseTable');
+
+      const initialAmount = document.querySelector('#initialAmount')
+
+      const balanceAmount = document.querySelector('#primary')
+
+      // initial value of totalExpense
+      let totalExpense = `Expense Amount:`;
+
+
+      // set the text to headElement SET VALUE TO DOM
+      headElement.textContent = totalExpense;
+
+      
+
+      // All Expense array
+      const allExpense = [];
+
+      function expenseHandler() {
+        // Expense object
+        const expenseItems = {};
+
+        // read value of inputText READ VALUE FROM INPUT BOX
+        const inputAmount = inputText.value;
+
+        const iA = initialAmount.value
+
+        const RAM = iA - inputAmount
+        
+        
+
+        // read value of inputDescEl
+        const inputDesc = inputDescEl.value;
+
+        // convert to number PARSEINT NUMBER
+        const inputExpense = parseInt(inputAmount, 10);
+
+        //put the values in object
+        expenseItems.desc = inputDesc;
+        expenseItems.amount = inputAmount;
+        expenseItems.moment = new Date()
+
+
+        // push expense Items to array of allExpense
+        allExpense.push(expenseItems);
+
+        // add expense to totalExpense
+        totalExpense = totalExpense + inputExpense;
+
+        const totalAmount = `${totalExpense}`;
+
+        const blA = `Balance Amount: ${RAM} `
+
+        // DISPLAY IN DOM
+        headElement.textContent = totalAmount;
+
+        balanceAmount.textContent = blA
+
+        // // tableData
+        // const data1 = allExpense[0];
+        // const data2 = allExpense[1];
+
+        // const tableData1 = `${data1.amount} : ${data1.desc}`;
+        // const tableData2 = `${data2.amount} : ${data2.desc}`;
+
+        // // table text
+        // const tableText = `
+        // <div>${tableData1}</div>
+        // <div>${tableData2}</div> `;
+
+        // loop through allExpense array using map function it return array of string
+        const op = allExpense.map((exp) => outputTable(exp));
+
+        function outputTable({ desc, amount, moment }){
+          return ` <li class="list-group-item d-flex justify-content-between">
+          <div class="d-flex flex-column text-capitalize">
+            ${desc}
+            <small class="text-muted">${moment.toLocaleDateString('en-US', { month: 'long', year: 'numeric', day:'numeric' })} </small>
+          </div>
+          <div>
+            <span class="px-5"> ${amount} </span>
+            <button type="button" class="btn btn-outline-danger btn-sm">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </li>`
+        }
+
+        // change the array of string to string using join method
+        const joinedOp = op.join('');
+        expenseTableEl.innerHTML = joinedOp;
+      }
+      // // counter begins
+      // let counter = 0;
+
+      // // listener function for the event
+      // function counterHandler() {
+      //   counter = counter + 1;
+      //   console.log(counter);
+      // }
+
+      // get button element GET BUTTON FROM DOM
+      const element = document.querySelector('#btnCounter');
+
+      // Add event listener to the button EVENTLISTENER FOR BUTTON AND CALLBACK
+      element.addEventListener('click', expenseHandler, false);
+     
+    </script>
+  </body>
+</html>
