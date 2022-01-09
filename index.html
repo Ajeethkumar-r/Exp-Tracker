@@ -125,10 +125,6 @@
           <ul class="list-group" id="expenseTable"></ul>
         </div>
 
-        <!-- js features -->
-        <!-- <input id="inputAmount" type="text" /> -->
-        <!-- <input id="inputDesc" type="text" /> -->
-        <!-- <button id="btnCounter">+</button> -->
     </div>
     <!-- Bootstrap theme -->
 
@@ -199,22 +195,21 @@
         // DISPLAY IN DOM
         headElement.textContent = totalAmount;
 
-        balanceAmount.textContent = blA
-
-        // // tableData
-        // const data1 = allExpense[0];
-        // const data2 = allExpense[1];
-
-        // const tableData1 = `${data1.amount} : ${data1.desc}`;
-        // const tableData2 = `${data2.amount} : ${data2.desc}`;
-
-        // // table text
-        // const tableText = `
-        // <div>${tableData1}</div>
-        // <div>${tableData2}</div> `;
+        balanceAmount.textContent = blA;
 
         // loop through allExpense array using map function it return array of string
         const op = allExpense.map((exp) => outputTable(exp));
+ 
+        // let btnDelete = document.querySelector('#btnDelete')
+
+        // btnDelete.addEventListener('click',  handleClick(expenseItems.moment.valueOf()) )
+        
+        // function handleClick(dateValue){
+        //   console.log(dateValue)
+        //   }
+        // let newArr = []
+          
+      
 
         function outputTable({ desc, amount, moment }){
           return ` <li class="list-group-item d-flex justify-content-between">
@@ -222,28 +217,14 @@
             ${desc}
             <small class="text-muted">${moment.toLocaleDateString('en-US', { month: 'long', year: 'numeric', day:'numeric' })} </small>
           </div>
-          <div>
-            <span class="px-5"> ${amount} </span>
-            <button type="button" class="btn btn-outline-danger btn-sm">
-              <i class="fas fa-trash-alt"></i>
-            </button>
-          </div>
         </li>`
         }
 
+      
         // change the array of string to string using join method
         const joinedOp = op.join('');
         expenseTableEl.innerHTML = joinedOp;
       }
-      // // counter begins
-      // let counter = 0;
-
-      // // listener function for the event
-      // function counterHandler() {
-      //   counter = counter + 1;
-      //   console.log(counter);
-      // }
-
       // get button element GET BUTTON FROM DOM
       const element = document.querySelector('#btnCounter');
 
